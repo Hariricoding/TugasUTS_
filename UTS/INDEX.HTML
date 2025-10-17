@@ -1,0 +1,161 @@
+<!-- Updated HTML with search bar -->
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portal Warta</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: #f8f9fa;
+        color: #333;
+      }
+      .header-top {
+        background-color: #064420;
+        color: white;
+        padding: 20px 0;
+        text-align: center;
+        position: relative;
+      }
+      .search-bar {
+        position: absolute;
+        top: 50%;
+        right: 20px;
+        transform: translateY(-50%);
+      }
+      .category-bar {
+        background-color: #064420;
+        border-top: 1px solid #046d31;
+        padding: 10px 0;
+      }
+      .category-bar .nav-link {
+        color: #e8f5e9 !important;
+        margin: 0 15px;
+        font-weight: 500;
+        transition: 0.3s;
+      }
+      .category-bar .nav-link:hover {
+        color: #c8f7c5 !important;
+        text-decoration: underline;
+      }
+      .card {
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+      }
+      .card:hover {
+        transform: translateY(-5px);
+      }
+      .btn-read {
+        background-color: #064420;
+        color: white;
+        border: none;
+      }
+      .btn-read:hover {
+        background-color: #046d31;
+      }
+      footer {
+        background-color: #064420;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+        margin-top: 50px;
+      }
+      footer a {
+        color: #c8f7c5;
+        text-decoration: none;
+        margin: 0 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header-top">
+      <h1>News updates</h1>
+      <p class="mb-0">informasi sesuai data terkini</p>
+      <div class="search-bar">
+        <input
+          type="text"
+          id="searchInput"
+          class="form-control"
+          placeholder="Cari berita..."
+        />
+      </div>
+    </div>
+    <nav class="category-bar">
+      <ul class="nav justify-content-center">
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            href="https://newsdata.io/api/1/latest?apikey=pub_b508a6a54e204413a9459b4132522d20&q=Teknologi%20ais"
+            >Teknologi</a
+          >
+        </li>
+        <li class="nav-item"><a class="nav-link" href="#">Olahraga</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Hiburan</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Kesehatan</a></li>
+      </ul>
+    </nav>
+    <div class="container my-5">
+      <div class="row g-4" id="newsContainer"></div>
+    </div>
+    <footer>
+      <p>&copy; 2025 Portal berita. sumber berita digital modern.</p>
+      <div>
+        <a href="#">Beranda</a> | <a href="#">Tentang</a> |
+        <a href="https://wa.me/qr/FDE5BPDCOIBAH1">Kontak</a>
+      </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        const newsData = [
+          {
+            title: "Festival Musik Terbesar Tahun Ini",
+            desc: "Ribuan pengunjung memadati festival musik...",
+            img: "https://images.unsplash.com/photo-1507874457470-272b3c8d8ee2",
+            url: "https://newsdata.io/search-dashboard",
+          },
+          {
+            title: "Film Blockbuster Pecahkan Box Office",
+            desc: "Film terbaru berhasil meraih kesuksesan...",
+            img: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba",
+            url: "https://newsdata.io/search-dashboard",
+          },
+          {
+            title: "Konser Virtual Reality Pertama",
+            desc: "Teknologi VR menghadirkan pengalaman...",
+            img: "https://images.unsplash.com/photo-1497493292307-31c376b6e479",
+            url: "https://newsdata.io/search-dashboard",
+          },
+          {
+            title: "Teknologi AI Terbaru Mengubah Dunia Kerja",
+            desc: "Kecerdasan buatan kini membantu...",
+            img: "https://techcrunch.com/wp-content/uploads/2025/10/adam-mosseri-at-bloomberg-screentime.png?resize=1200,675",
+            url: "https://newsdata.io/search-news",
+          },
+        ];
+        function renderNews(filter = "") {
+          $("#newsContainer").empty();
+          const filtered = newsData.filter((n) =>
+            n.title.toLowerCase().includes(filter.toLowerCase())
+          );
+          $.each(filtered, function (index, news) {
+            const card = `<div class='col-md-6 col-lg-3'><div class='card h-100'><img src='${news.img}' class='card-img-top'><div class='card-body'><h5>${news.title}</h5><p>${news.desc}</p><a href='${news.url}' class='btn btn-read'>Baca Selengkapnya</a></div></div></div>`;
+            $("#newsContainer").append(card);
+          });
+        }
+        renderNews();
+        $("#searchInput").on("keyup", function () {
+          renderNews($(this).val());
+        });
+      });
+    </script>
+  </body>
+</html>
